@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Stack } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 import Logo from '../assets/images/Logo.png';
 
 const Navbar = () => {
+    const location = useLocation();
+
+    const setLocation = (loc) => {
+        if (location.pathname !== '/') {
+            return '/' + loc;
+        } else {
+            return loc;
+        }
+    }
+
     return (
         <Stack
             direction="row"
@@ -22,8 +33,8 @@ const Navbar = () => {
                 alignItems="flex-end"
             >
                 <Link to="/" style={{ textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625' }}>Home</Link>
-                <a href="#exercises" style={{ textDecoration: 'none', color: '#3A1212' }}>Exercises</a>
-                <a href="#search" style={{ textDecoration: 'none', color: '#3A1212' }}>Search</a>
+                <a href={setLocation('#exercises')} style={{ textDecoration: 'none', color: '#3A1212' }}>Exercises</a>
+                <a href={setLocation('#search')} style={{ textDecoration: 'none', color: '#3A1212' }}>Search</a>
             </Stack>
         </Stack>
     )
